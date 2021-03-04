@@ -10,6 +10,7 @@ import {
 import Review from './components/Review/Review';
 import Inventory from './components/Inventory/Inventory';
 import NotFound from './components/NotFound/NotFound';
+import ProductDetail from './components/ProductDetail/ProductDetail';
 function App() {
   return (
     <div>
@@ -23,12 +24,15 @@ function App() {
             <Review></Review>
           </Route>
           <Route path='/inventory'>
-              <Inventory></Inventory>
+            <Inventory></Inventory>
           </Route>
-          <Route exact path= '/'>
+          <Route exact path='/'>
             <Shop></Shop>
           </Route>
-          <Route path= '*'>
+          <Route path='/product/:productKey'>
+              <ProductDetail></ProductDetail>
+          </Route>
+          <Route path='*'>
             <NotFound></NotFound>
           </Route>
         </Switch>
