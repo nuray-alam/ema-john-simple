@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import fakeData from '../../fakeData';
-import { getDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, processOrder, removeFromDatabaseCart } from '../../utilities/databaseManager';
+import Cart from '../Cart/Cart';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import './Review.css'
+import happyImage from '../../images/giphy.gif'
 const Review = () => {
 
     const [cart, setCart] = useState([]);
+    const [orderPlaced, setOrderPlaced] = useState(false);
+    let thankYou;
+    if (orderPlaced) {
+       thankYou =  <img src={happyImage} alt="" />
+    }
+    else {
+
+    }
     useEffect(() => {
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
@@ -16,16 +26,40 @@ const Review = () => {
         });
 
         setCart(cartProducts);
-        console.log('saved cart:',savedCart);
-        console.log('product keys:',productKeys);
+        // console.log('saved cart:', savedCart);
+        // console.log('product keys:', productKeys);
         // console.log(counts);
     }, [])
+
+    const removeProduct = (productKey) => {
+        // console.log('remove product clicked');
+        // console.log('Product key is:', productKey);
+        const newCart = cart.filter(pd => pd.key !== productKey);
+        setCart(newCart);
+        removeFromDatabaseCart(productKey);
+    };
+
+    const handlePlaceOrder = () => {
+        setCart([]);
+        setOrderPlaced(true)
+        processOrder();
+    };
     return (
-        <div>
-            <h1>Cart Items : {cart.length}</h1>
-            {
-                cart.map(pd => <ReviewItem product = {pd}></ReviewItem>)
-            }
+        <div className='review-container'>
+            <div className="item-container">
+                <h1>Cart Items : {cart.length}</h1>
+                {
+                    cart.map(pd => <ReviewItem removeProduct={removeProduct} product={pd}></ReviewItem>)
+                }
+                {
+                    thankYou
+                }
+            </div>
+            <div className="cart-container">
+                <Cart cart={cart}>
+                    <button onClick={handlePlaceOrder} className='main-button'>Place Order</button>
+                </Cart>
+            </div>
         </div>
     );
 };

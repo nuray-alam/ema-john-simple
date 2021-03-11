@@ -1,0 +1,20 @@
+.review-container {
+  display: flex;
+}
+.review-container h1{
+    text-align: center;
+}
+.item-container {
+  width: 70%;
+  margin-left: 20px;
+  margin-right: 5px;
+  border-right: 1px solid lightgray;
+}
+.main-button{
+  background-color: gold;
+  width: 150px;
+  height: 30px;
+  border: 1px solid darkgray;
+  border-radius: 5px;
+  cursor: pointer;
+}

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Cart.css'
 const Cart = (props) => {
     const cart = props.cart;
-    const totalPrice = cart.reduce((total, prd) => total + prd.price, 0);
+    const totalPrice = cart.reduce((total, prd) => total + (prd.price * prd.quantity), 0);
 
     const formatNumber = num => {
         const precision = num.toFixed(2);
@@ -17,7 +16,7 @@ const Cart = (props) => {
     else if (totalPrice > 15) {
         shippingCost = 4.99;
     }
-    else if (totalPrice == 0) {
+    else if (totalPrice === 0) {
         shippingCost = 0;
     }
     const tax = (totalPrice / 10).toFixed(2);
@@ -31,9 +30,9 @@ const Cart = (props) => {
             <p><small>Shipping Cost: {shippingCost}</small></p>
             <p><small>Tax + Vat: {tax}</small></p>
             <p>Total Price: {grandTotal}</p>
-            <Link to='/review'>
-            <button className='main-button'>Review Order</button>
-            </Link>
+            {
+                props.children
+            }
         </div>
     );
 };

@@ -7,7 +7,7 @@ const ProductDetail = () => {
 
     const { productKey } = useParams();   // dynamically read the link parameter
     const product = fakeData.find(product => product.key == productKey);
-    console.log(product);
+    // console.log(product);
     return (
         <div>
             <h1>Your Product Detail</h1>
