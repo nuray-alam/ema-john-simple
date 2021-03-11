@@ -8,6 +8,7 @@ const Shop = () => {
     console.log(fakeData);
     const first10 = fakeData.slice(0, 10);
     const [products, setProducts] = useState(first10);
+    const [cart, setCart] = useState([]);
 
     const handleAddProduct = (product) => {
         console.log("Product is clicked", product);
@@ -17,8 +18,7 @@ const Shop = () => {
         const count = sameProduct.length;
         addToDatabaseCart(product.key, count)
     };
-
-    const [cart, setCart] = useState([]);
+    
     return (
         <div className='shop-container'>
             <div className="product-container">

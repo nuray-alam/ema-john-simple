@@ -16,8 +16,8 @@ const Review = () => {
         });
 
         setCart(cartProducts);
-        // console.log(savedCart);
-        // console.log(productKeys);
+        console.log('saved cart:',savedCart);
+        console.log('product keys:',productKeys);
         // console.log(counts);
     }, [])
     return (
